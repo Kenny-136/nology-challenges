@@ -1,0 +1,28 @@
+.orange-color {
+  color: darkorange;
+}
+
+.green-color {
+  color: green;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+header > h1 {
+  text-align: center;
+}
+
+header > p {
+  text-align: right;
+}
+
+ul {
+  border: 1px solid black;
+}
+
+ul > li {
+  font-weight: 600;
+  list-style-type: none;
+}
