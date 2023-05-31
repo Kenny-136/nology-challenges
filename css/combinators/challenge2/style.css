@@ -1,0 +1,19 @@
+body p {
+  margin-left: 25px;
+}
+
+h1 + p {
+  font-style: italic;
+}
+
+h1 + p + p , h1 + p + p + p{
+  color: darkgrey;
+}
+
+h2 + p, h2 + p + p , h2 + p + p + p {
+  text-decoration: underline;
+}
+
+h3 + p ~ p{
+color: blue;
+}
