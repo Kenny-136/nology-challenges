@@ -1,0 +1,45 @@
+body {
+  max-width: 400px;
+  padding: 15px;
+}
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+form > label , form > input , form > button {
+  margin: 5px;
+  border-radius: 5px;
+}
+
+button:enabled, input:enabled {
+  background-color: lightseagreen;
+}
+
+input:required {
+  border: 2px solid red;
+}
+
+button:disabled {
+  color: grey;
+}
+
+ul > li {
+  list-style-type: none;
+}
+
+a:link {
+  color: tomato;
+}
+
+a:visited {
+  color: aqua;
+}
+
+a:active {
+  color: blueviolet;
+}
+
+a:hover {
+  color: yellow;
+}
