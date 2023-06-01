@@ -1,0 +1,91 @@
+section {
+  width: 900px;
+  height: 300px;
+  margin-bottom: 300px;
+}
+
+#card1 {
+  background-color: rgba(173,216,230,255);
+}
+
+#card2 {
+  background-color: rgba(255,165,0,255);
+}
+
+#card3 {
+  background-color: rgba(255,105,180,255);
+}
+
+#card4 {
+  background-color: rgba(173,216,230,255);
+}
+
+#card5 {
+  background-color: rgba(255,165,0,255);
+}
+
+#card6 {
+  background-color: rgba(255,105,180,255);
+}
+
+#card7 {
+  background-color: rgba(220,20,60,255);
+}
+
+#card8 {
+  background-color: rgba(173,216,230,255);
+}
+
+#card9 {
+  background-color: rgba(255,165,0,255);
+}
+
+#card10 {
+  background-color: rgba(255,105,180,255);
+}
+
+#card11 {
+  background-color: rgba(220,20,60,255);
+}
+
+#card12 {
+  background-color: rgba(144,238,144,255);
+}
+
+#section1 {
+  display: flex;
+}
+#section1 > div {
+  height: 100%;
+  width: 33%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#section2 {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#section2 > div {
+  height: 100%;
+  width: 33%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#section3 {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-between;
+}
+
+#section3 > div {
+  height: 100%;
+  width: 33%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
