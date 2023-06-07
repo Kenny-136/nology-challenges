@@ -41,7 +41,7 @@ console.log(totalScore(2, 4))
 
 // Less than 100?
 // --------------
-const lessThan100 = (num1, num2) => (num1 + num2 < 100) ? true : false
+const lessThan100 = (num1, num2) => (num1 + num2 < 100)
 console.log(lessThan100(22,15))
 console.log(lessThan100(83,34))
 console.log(lessThan100(3,77))
