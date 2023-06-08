@@ -69,11 +69,11 @@ const thing = "I am a thing";
 export const findType = () => {
     let string = ''
     if (Number.isInteger(thing)) {
-        string = "this is a number"
+        string = "This is a number"
     } else if (typeof thing === 'string') {
-        string = "this is a string"
+        string = "This is a string"
     } else if (typeof thing === 'boolean') {
-        string = "this is a boolean"
+        string = "This is a boolean"
     } else {
         string = "I don't know what this thing is"
     }
