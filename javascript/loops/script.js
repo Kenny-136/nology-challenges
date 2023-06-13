@@ -76,6 +76,7 @@ const weirdFunction = (variable) => {
   }
   return newString.toString()
 }
+weirdFunction(variable)
 
 // # Challenge: Removing Vowels
 
