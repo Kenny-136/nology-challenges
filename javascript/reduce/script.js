@@ -3,7 +3,7 @@
 const arrOfCodes = [114, 101, 100, 117, 99, 101];
 
 console.log(
-  arrOfCodes.reduce((accumulator, number) =>  accumulator + number, '')
+  arrOfCodes.reduce((accumulator, number) =>  accumulator + String.fromCharCode(number), '')
 )
 
 // given an array of letters, reduce them to get the sum of character codes
