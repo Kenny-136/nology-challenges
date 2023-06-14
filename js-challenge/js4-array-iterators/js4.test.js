@@ -1,357 +1,192 @@
-import * as challenge from "./challenge";
-
-const {
-  removeFalseValues,
-  createPercentageList,
-  createListOfPoessessions,
-  convertStringToNumbersArray,
-  createOddEvenArray,
-  filterBooksBySearch,
-  formatStringArray,
-  formatString,
-  fizzBuzz,
-} = challenge;
-
-/**
- * REMOVE X FROM DESCRIBE FUNCTION TO STOP SKIPPING TEST BLOCKS
+/* JS4 builds on the previous challenges and adds the use of Array iterators, Arrays, For Loops, Conditionals (If, else, switch)
+ *  & calling your own functions.
  */
 
-const mixedBooleanArr = [true, false, false, true, false, true, true];
-const toBePercentages = [1, 0.5, 0.25, 0.4, 0.99, 0.1];
-const percentages = ["100%", "50%", "25%", "40%", "99%", "10%"];
-const possessions = ["Cabbage", "Turnip", "Radish", "Carrot"];
-const mattsPosessions = ["Matt's Cabbage", "Matt's Turnip", "Matt's Radish", "Matt's Carrot"];
-const numbersCSV = "5+2+55+1990+45+15+22";
-const stringsToClean = ["  CaBBage  ", "TuRnIp", "  RADish", "CARroT  "];
-const cleanedStrings = "cabbage+turnip+radish+carrot";
-const formattedStringArr = ["T", "e", "S", "t", "S", "t", "R", "i", "N", "g"];
-
-describe("Testing removeFalseValues()", () => {
-  it("Should return an array", () => {
-    expect(Array.isArray(removeFalseValues([true]))).toBe(true);
-    expect(Array.isArray(removeFalseValues([false]))).toBe(true);
-  });
-
-  it("Should return an array of Booleans", () => {
-    const testForBooleans = removeFalseValues(mixedBooleanArr).every((bool) => typeof bool === "boolean");
-    expect(testForBooleans).toBe(true);
-  });
-
-  it("Should remove false values from an array", () => {
-    expect(removeFalseValues(Array(5).fill(false)).length).toBe(0);
-    expect(removeFalseValues(Array(20).fill(false)).length).toBe(0);
-  });
-
-  it("Should have the same amount of true values as the orginal array", () => {
-    expect(removeFalseValues(mixedBooleanArr)).toEqual([true, true, true, true]);
-    expect(removeFalseValues(Array(5).fill(true)).length).toBe(5);
-    expect(removeFalseValues(Array(60).fill(true)).length).toBe(60);
-  });
-});
-
-xdescribe("Testing createPercentageList()", () => {
-  it("Should return an array", () => {
-    expect(Array.isArray(createPercentageList(toBePercentages))).toBe(true);
-  });
-
-  it("Should return an array of Strings", () => {
-    const testForStrings = createPercentageList(toBePercentages).every((string) => typeof string === "string");
-    expect(testForStrings).toBe(true);
-  });
-
-  it("Should convert numbers into percentages", () => {
-    expect(createPercentageList(toBePercentages)).toEqual(percentages);
-    expect(createPercentageList([0.25])).toEqual(["25%"]);
-    expect(createPercentageList(Array(20).fill(1))).toEqual(Array(20).fill("100%"));
-  });
-
-  it("Should match given array's length", () => {
-    expect(createPercentageList(Array(20).fill(1)).length).toBe(20);
-  });
-});
-
-xdescribe("Testing createListOfPoessessions()", () => {
-  it("Should return an array", () => {
-    expect(Array.isArray(createListOfPoessessions(possessions, "Matt's"))).toBe(true);
-  });
-
-  it("Should return an array of Strings", () => {
-    const testForStrings = createListOfPoessessions(possessions, "Matt's").every(
-      (string) => typeof string === "string"
-    );
-    expect(testForStrings).toBe(true);
-  });
-
-  it("Should prefix name as expected", () => {
-    expect(createListOfPoessessions(possessions, "Matt's")).toEqual(mattsPosessions);
-    expect(createListOfPoessessions(["shoes", "jacket", "belt"], "disco")).toEqual([
-      "disco shoes",
-      "disco jacket",
-      "disco belt",
-    ]);
-  });
-
-  it("Should match given Array's length", () => {
-    expect(createListOfPoessessions(possessions, "Matt's").length).toBe(4);
-    expect(createListOfPoessessions(Array(20).fill("A"), "disco").length).toBe(20);
-  });
-});
-
-xdescribe("Testing convertStringToNumbersArray()", () => {
-  it("Should return an array", () => {
-    expect(Array.isArray(convertStringToNumbersArray(numbersCSV))).toBe(true);
-  });
-
-  it("Should return an array of Numbers", () => {
-    const testForNumbers = convertStringToNumbersArray(numbersCSV).every((number) => typeof number === "number");
-    expect(testForNumbers).toBe(true);
-  });
-
-  it("Should convert string as expected", () => {
-    expect(convertStringToNumbersArray(numbersCSV)).toEqual([5, 2, 55, 1990, 45, 15, 22]);
-    expect(convertStringToNumbersArray("1+2")).toEqual([1, 2]);
-    expect(convertStringToNumbersArray(Array(10).fill("1").join("+"))).toEqual(Array(10).fill(1));
-  });
-
-  it("Should handle big inputs", () => {
-    expect(convertStringToNumbersArray(Array(100).fill("1").join("+"))).toEqual(Array(100).fill(1));
-    expect(convertStringToNumbersArray(Array(1000).fill("1").join("+")).length).toBe(1000);
-  });
-
-  it("Should handle single inputs", () => {
-    expect(convertStringToNumbersArray("100")).toEqual([100]);
-  });
-});
-
-xdescribe("Testing createOddEvenArray()", () => {
-  it("Should return an array", () => {
-    expect(Array.isArray(createOddEvenArray(numbersCSV))).toBe(true);
-  });
-
-  it("Should return an array of Strings", () => {
-    const testForStrings = createOddEvenArray(numbersCSV).every((string) => typeof string === "string");
-    expect(testForStrings).toBe(true);
-  });
-
-  it("Should convert string as expected", () => {
-    expect(createOddEvenArray(numbersCSV)).toEqual(["odd", "even", "odd", "even", "odd", "odd", "even"]);
-    expect(createOddEvenArray("1+2")).toEqual(["odd", "even"]);
-    expect(createOddEvenArray(Array(10).fill("1").join("+"))).toEqual(Array(10).fill("odd"));
-  });
-
-  it("Should handle big inputs", () => {
-    expect(createOddEvenArray(Array(100).fill("1").join("+"))).toEqual(Array(100).fill("odd"));
-    expect(createOddEvenArray(Array(1000).fill("1").join("+")).length).toBe(1000);
-  });
-
-  it("Should handle single inputs", () => {
-    expect(createOddEvenArray("100")).toEqual(["even"]);
-  });
-});
-
-xdescribe("Testing filterBooksBySearch()", () => {
-  it("Should return an array", () => {
-    expect(Array.isArray(filterBooksBySearch(["one thing"], "one thing"))).toBe(true);
-  });
-
-  it("Should return an array of Strings", () => {
-    const testForStrings = filterBooksBySearch(["disco", "disco", "shoes", "disco shoe"], "disco").every(
-      (string) => typeof string === "string"
-    );
-    expect(testForStrings).toBe(true);
-  });
-
-  it("Should handle one match", () => {
-    expect(filterBooksBySearch(["one thing"], "one thing")).toEqual(["one thing"]);
-    expect(filterBooksBySearch(["a", "aa", "bb", "aaa", "b"], "bb").length).toBe(1);
-  });
-
-  it("Should handle multiple matches", () => {
-    expect(filterBooksBySearch(["disco", "disco", "shoes", "disco shoe"], "disco").length).toBe(3);
-    expect(filterBooksBySearch(["disco", "disco", "shoes", "disco shoe"], "oe").length).toBe(2);
-  });
-
-  it("Should handle large matches", () => {
-    expect(filterBooksBySearch(Array(100).fill("disco"), "disco").length).toBe(100);
-  });
-
-  it("Should handle single character matches", () => {
-    expect(filterBooksBySearch(["a", "aa", "bb", "aaa", "b"], "a").length).toBe(3);
-    expect(filterBooksBySearch(["a", "aa", "bb", "aaa", "b"], "b").length).toBe(2);
-  });
-
-  it("Should handle no matches", () => {
-    expect(filterBooksBySearch(Array(100).fill("disco"), "techno").length).toBe(0);
-    expect(filterBooksBySearch(["one thing"], "nothing")).toEqual([]);
-    expect(filterBooksBySearch([], "nothing")).toEqual([]);
-    expect(filterBooksBySearch([])).toEqual([]);
-  });
-});
-
-xdescribe("Testing formatStringArray()", () => {
-  it("Should return a String", () => {
-    expect(typeof formatStringArray(["  front"])).toBe("string");
-  });
-
-  it("Should NOT return undefined", () => {
-    expect(formatStringArray(["  front"])).toBeDefined();
-  });
-
-  it("Should remove whitespace", () => {
-    expect(formatStringArray(["  front"])).toBe("front");
-    expect(formatStringArray(["back "])).toBe("back");
-    expect(formatStringArray(["  both "])).toBe("both");
-  });
-
-  it("Should be lowercase", () => {
-    expect(formatStringArray(["UPPERCASE"])).toBe("uppercase");
-    expect(formatStringArray(["mIxEd"])).toBe("mixed");
-  });
-
-  it("Should format a single string as expected", () => {
-    expect(formatStringArray(["  DAVID "])).toBe("david");
-  });
-
-  it("Should format multiple strings as expected", () => {
-    expect(formatStringArray(stringsToClean)).toBe(cleanedStrings);
-    expect(formatStringArray(cleanedStrings.split("+"))).toBe(cleanedStrings);
-  });
-});
-
-xdescribe("Testing formatString()", () => {
-  it("Should NOT return undefined", () => {
-    expect(formatString("  defined")).toBeDefined();
-  });
-
-  it("Should return an array", () => {
-    expect(Array.isArray(formatString("white  space"))).toBe(true);
-  });
-
-  it("Should return an array of Strings", () => {
-    const testForStrings = formatString("white  space").every((string) => typeof string === "string");
-    expect(testForStrings).toBe(true);
-  });
-
-  it("Should remove numbers", () => {
-    expect(formatString("nu55mber77s").length).toBe(7);
-    expect(formatString("1234567").length).toBe(0);
-  });
-
-  it("Should remove punctuation", () => {
-    expect(formatString("punctuation!\"£$%^&*()?[]{}|,./;'@~#+=").length).toBe(11);
-    expect(formatString('!"£$%^&').length).toBe(0);
-  });
-
-  it("Should remove whitespace", () => {
-    expect(formatString("  white  space  ").length).toBe(10);
-    expect(formatString("white  space").length).toBe(10);
-  });
-
-  it("Should uppercase even index", () => {
-    expect(formatString("he")[0]).toBe("H");
-    expect(formatString("hello")[2]).toBe("L");
-  });
-
-  it("Should lowercase odd index", () => {
-    expect(formatString("he")[1]).toBe("e");
-    expect(formatString("hello")[3]).toBe("l");
-  });
-
-  it("Should format string as expected", () => {
-    expect(formatString("test string")).toEqual(formattedStringArr);
-    expect(formatString('898    te%^$£"&*()st str3552621ing')).toEqual(formattedStringArr);
-  });
-
-  it("Should handle empty input", () => {
-    expect(formatString("")).toEqual([]);
-  });
-});
-
-xdescribe("Testing fizzBuzz()", () => {
-  const cleanArray = Array(50)
-    .fill(0)
-    .map((_, index) => index + 1);
-
-  const cleanStringArray = Array(15)
-    .fill(0)
-    .map((_, index) => `${index + 1}`);
-
-  const firstFifteenArray = "1-2-Fizz-4-Buzz-Fizz-7-8-Fizz-Buzz-11-Fizz-13-14-FizzBuzz".split("-");
-
-  const mixedArray = [-1, 5, 6, "disco", 0, 0, 7, "5", 45];
-
-  it("Should NOT return undefined", () => {
-    expect(fizzBuzz(cleanArray)).toBeDefined();
-  });
-
-  it("Should return an array", () => {
-    expect(Array.isArray(fizzBuzz(cleanArray))).toBe(true);
-  });
-
-  it("Should return an array of Strings", () => {
-    const testForStrings = fizzBuzz(cleanArray).every((string) => typeof string === "string");
-    expect(testForStrings).toBe(true);
-  });
-
-  it("Should have the correct amount of Fizz", () => {
-    const fizzMatch = fizzBuzz(cleanArray).filter((el) => el === "Fizz");
-
-    expect(fizzMatch.length).toBe(13);
-  });
-
-  it("Should have Fizz in the correct index", () => {
-    const fizzMatch = fizzBuzz(cleanArray);
-
-    expect(fizzMatch[2]).toBe("Fizz");
-    expect(fizzMatch[47]).toBe("Fizz");
-    expect(fizzMatch[35]).toBe("Fizz");
-  });
-
-  it("Should have the correct amount of Buzz", () => {
-    const buzzMatch = fizzBuzz(cleanArray).filter((el) => el === "Buzz");
-
-    expect(buzzMatch.length).toBe(7);
-  });
-
-  it("Should have Buzz in the correct index", () => {
-    const BuzzMatch = fizzBuzz(cleanArray);
-
-    expect(BuzzMatch[4]).toBe("Buzz");
-    expect(BuzzMatch[19]).toBe("Buzz");
-    expect(BuzzMatch[39]).toBe("Buzz");
-  });
-
-  it("Should have the correct amount of FizzBuzz", () => {
-    const FizzBuzzMatch = fizzBuzz(cleanArray).filter((el) => el === "FizzBuzz");
-
-    expect(FizzBuzzMatch.length).toBe(3);
-  });
-
-  it("Should have FizzBuzz in the correct index", () => {
-    const FizzBuzzMatch = fizzBuzz(cleanArray);
-
-    expect(FizzBuzzMatch[14]).toBe("FizzBuzz");
-    expect(FizzBuzzMatch[29]).toBe("FizzBuzz");
-    expect(FizzBuzzMatch[44]).toBe("FizzBuzz");
-  });
-
-  it("Should NOT alter the length of a clean input", () => {
-    expect(fizzBuzz(cleanArray).length).toBe(50);
-  });
-
-  it("Should fizzBuzz a a clean array of numbers as strings as expected", () => {
-    expect(fizzBuzz(cleanStringArray)).toEqual(firstFifteenArray);
-  });
-
-  it("Should  NOT alter the length of a clean array of numbers as strings", () => {
-    expect(fizzBuzz(cleanStringArray).length).toEqual(15);
-  });
-
-  it("Should fizzBuzz a mixed input as expected", () => {
-    expect(fizzBuzz(mixedArray)).toEqual(["Buzz", "Fizz", "7", "Buzz", "FizzBuzz"]);
-  });
-
-  it("Should alter the length of a mixed input", () => {
-    expect(fizzBuzz(mixedArray).length).toBe(5);
-  });
-});
+/* 
+  All challenges in this repository are seperated into four levels: Foundation, Intermediate, Advanced and Expert.
+  The expectation is to complete all Foundation level challenges, with Intermediate and upwards pushing your knowledge
+  and may require you to google things in order to solve them. If you find an answer online somewhere, be kind and
+  share it with the group!
+*/
+
+/**
+ * Foundation Challenges
+ */
+
+/**
+ * A function that takes an array of Booleans and then removes the false values from the given array.
+ * It should create a new array only consiting of the true values.
+ *
+ * @param {boolean[]} booleanArr [true, true, false, false, true]
+ * @return {boolean[]} [true, true, true]
+ */
+
+export const removeFalseValues = (booleanArr) => {
+  return booleanArr.filter(boolean => boolean === true)
+};
+
+/**
+ * A function that takes an array of numbers that are between 0 - 1.
+ * The function needs to create a new array with the numbers converted into a percentage
+ *
+ * @param {number[]} numbersArr [1, .5, .7, .25]
+ * @return {string[]} ["100%", "50%", "70%", "25%"]
+ */
+
+export const createPercentageList = (numbersArr) => {
+  return numbersArr.reduce((result, number) => {
+    result.push(`${number * 100}%`)
+    return result
+  } ,[])
+};
+
+/**
+ * A function that takes an array of possessions and a name.
+ * The functions needs to create a new array with the name prefixed to each item.
+ *
+ * @param {string[]} possessionsArr ["shoes", "jacket", "belt"]
+ * @param {string} name "disco"
+ * @return {string[]} ["disco shoes", "disco jacket", "disco belt"]
+ */
+
+export const createListOfPoessessions = (possessionsArr, name) => {
+  return possessionsArr.reduce((result, possession) => {
+      result.push(`${name} ${possession}`)
+    return result
+  }, []);
+};
+
+/**
+ * Intemediate Challenges
+ */
+
+/**
+ * Have a look at the String method split()
+ *
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split
+ *
+ * You may need to use it below.
+ */
+
+/**
+ * A function that takes a string of numbers joined with a "+" and returns an array of those numbers.
+ * The strings will need to be converted into numbers.
+ * e.g 1 instead of "1"
+ *
+ * @param {string} numberString - "1+2+3+4+5"
+ * @return {number[]} [1, 2, 3, 4, 5]
+ */
+
+export const convertStringToNumbersArray = (numberString) => {
+  return numberString.split('+').map(number => Number(number))
+};
+
+/**
+ * A function that takes a string of numbers joined with a "+" and creates a new array based on if the number is even or odd.
+ * Every number in the string will need to checked.
+ *
+ * @param {string} numberString - "1+2+3+4+5"
+ * @return {string[]} ['odd', 'even', 'odd', 'even', 'odd']
+ */
+
+export const createOddEvenArray = (numberString) => {
+  return numberString.split('+').map(number => number % 2 === 0 ? 'even' : 'odd')
+};
+
+/**
+ * A function that takes an array of book titles and a search term.
+ * The function needs fo remove any book titles that do not include the search term.
+ *
+ * @param {string[]} booksArr ["JavaScript: The Definitive Guide", "JavaScript: The Good Parts", "The Google story", "React for Dummies"]
+ * @param {string} - searchTerm - "Google"
+ * @return {string[]} - ["The Google story"]
+ */
+
+export const filterBooksBySearch = (booksArr, searchTerm) => {
+  return booksArr.reduce((result, book) => {
+    book.includes(searchTerm) ? result.push(book) : result
+    return result
+  } , [])
+};
+
+/**
+ * Advanced Challenges
+ */
+
+/**
+ * A function that takes a list, cleans each item and joins them with a +.
+ * When it "cleans" it remove's whitespace and makes sure the string is lowercase.
+ *
+ * This function is failing the test's can you figure out why?
+ * The bug is within the function, the test's are fine.
+ * Can you get it to pass the tests?
+ *
+ * @param {string[]} stringArr ["  dIsco", " ShOes "]
+ * @return {string} "disco+shoes"
+ */
+
+export const formatStringArray = (stringArr) => {
+  const cleanedArr = stringArr.map((string) => string.trim().toLowerCase());
+  const joinedString = cleanedArr.join("+");
+  return joinedString;
+};
+
+/**
+ * A function that takes a string, cleans it and formats it based on a condition.
+ *
+ * It will need to remove anything that is NOT a letter from the string.
+ * - e.g numbers, punctuation, whitespace.
+ *
+ * If the index of the letter is even the letter needs to be Uppercase.
+ * If the index of the letter is odd the letter needs to be Lowercase.
+ *
+ * @param {string} string " 22 $$He LL--O!%^& "
+ * @return {string[]} [ 'H', 'e', 'L', 'l', 'O' ]
+ */
+
+export const formatString = (string) => {
+  let cleanString = string.replace(/[^a-zA-Z]/gi, '').split('')
+  return cleanString.reduce((result, letter , index)=> {
+    index % 2 === 0 ? result.push(letter.toUpperCase()) : result.push(letter.toLowerCase())
+    return result
+  }, [])
+};
+
+/**
+ * Expert Challenge
+ */
+
+/**
+ * A function that takes an array and FizzBuzzes it.
+ *
+ * It should remove anything from the given array that is NOT a POSITIVE number or a POSITIVE number as a STRING.
+ *
+ * If we were given [-1, "disco", "3", 5, "15", 2, 0]
+ * We would be left with this ["3", 5, "15", 2]
+ *
+ * It then needs to create a NEW array from this clean array based on the conditons below:
+ *
+ * For multiples of three replace the number with "Fizz".
+ * For multiples of five replace the number with "Buzz".
+ * For numbers which are multiples of both three and five replace the number with "FizzBuzz".
+ * All the other numbers need to be strings.
+ *
+ * @param {*[]} mixedArray [-1, "disco", "3", 5, "15", 2, 0]
+ * @return {string[]} [ "Fizz", "Buzz", "FizzBuzz", "2" ]
+ */
+
+export const fizzBuzz = (mixedArray) => {
+  let cleanArray = mixedArray.filter(element => element > 0 || Number(element) > 0)
+  return cleanArray.reduce((result, number) => {
+    if ( Number(number) % 15 == 0) {
+      result.push('FizzBuzz')
+    } else if (Number(number) % 3 == 0) {
+      result.push('Fizz')
+    } else if (Number(number) % 5 == 0) {
+      result.push('Buzz')
+    } else {
+      result.push(`${number}`)
+    }
+    return result
+  } ,[])
+};
