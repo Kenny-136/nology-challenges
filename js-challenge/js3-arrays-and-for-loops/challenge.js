@@ -207,26 +207,21 @@ export const generateHighscores = (playersArr, scoresArr) => {
 // };
 
 export const encryptString = (toEncrypt) => {
-  let line1 = []
-  let line2 = []
-  let line3 = []
+  if (toEncrypt) {
+    let arr1 = [];
+    let arr2 = [];
+    let arr3 = [];
 
-  for (let i =  0; i < toEncrypt.length; i++) {
- 
-    if (toEncrypt.length <= 3) {
-      return toEncrypt
-    } else {
-      if ( i === 0 ) {
-        line1.push(toEncrypt[i])
-      } else if (i % 3 === 0) {
-        line3.push(toEncrypt[i])
-      } else if (i % 2 === 0) {
-        line2.push(toEncrypt[i]) 
-      } else if (i % 2 === 1) {
-        line1.push(toEncrypt[i])
-      }
+    for (let i = 0; i < toEncrypt.length; i++) {
+      arr1.push(toEncrypt[i]);
+      i++;
+      arr2.push(toEncrypt[i]);
+      i++;
+      arr3.push(toEncrypt[i]);
     }
+
+    return arr1.join("") + arr2.join("") + arr3.join("");
+  } else {
+    return toEncrypt;
   }
-    
-    return `${line1.join('')}${line2.join('')}${line3.join('')}`
 };
