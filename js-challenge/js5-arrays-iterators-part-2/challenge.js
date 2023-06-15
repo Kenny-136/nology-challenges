@@ -21,9 +21,7 @@
  * @return {number} 30
  */
 
-export const totalScoresArr = (scoresArr) => {
-  return;
-};
+export const totalScoresArr = (scoresArr) => scoresArr.reduce((result, num) => result + num)
 
 /**
  * A function that turns a string into an array and uses a ARRAY ITERATOR to reverse it.
@@ -35,7 +33,10 @@ export const totalScoresArr = (scoresArr) => {
  */
 
 export const reverseString = (toReverse) => {
-  return;
+  return toReverse.split('').reduce((result, letter) => {
+    result.unshift(letter)
+    return result
+  }, []).join("")
 };
 
 /**
@@ -47,9 +48,7 @@ export const reverseString = (toReverse) => {
  * @return {string[]} ["b", "b", "b", "g", "l", "n", "x", "x"]
  */
 
-export const sortCharactersAlphabetically = (charcterArr) => {
-  return;
-};
+export const sortCharactersAlphabetically = (charcterArr) => charcterArr.map(letter => letter.toLowerCase()).sort()
 
 /**
  * Intemediate Challenges
@@ -62,9 +61,7 @@ export const sortCharactersAlphabetically = (charcterArr) => {
  * @return {number[]} [9190, 55, 9, 6, 2, 0.5]
  */
 
-export const sortNumbersHighToLow = (numberArr) => {
-  return;
-};
+export const sortNumbersHighToLow = (numberArr) => numberArr.sort(function(a, b){return a-b}).reverse() == numberArr ?  numberArr : numberArr.sort().reverse()
 
 /**
  * A function that checks if a given item is 'instock'.
@@ -94,7 +91,7 @@ export const checkItemInstock = (toCheck) => {
     "blueberry",
     "melon",
   ];
-  return;
+  return stockList.indexOf(toCheck) + 1 ? `${toCheck} is instock, it is on aisle ${stockList.indexOf(toCheck)}.` : `Sorry ${toCheck} is not instock.`
 };
 
 /**
@@ -107,9 +104,7 @@ export const checkItemInstock = (toCheck) => {
  * @return {boolean} false
  */
 
-export const checkPrimaryColours = (coloursArr) => {
-  return;
-};
+export const checkPrimaryColours = (coloursArr) => (coloursArr.filter(colour => colour !== 'red' && colour !== 'blue' && colour !== 'yellow').length === 0)
 
 /**
  * Advanced Challenges
@@ -124,9 +119,7 @@ export const checkPrimaryColours = (coloursArr) => {
  * @return {boolean} true
  */
 
-export const checkStringPalindrome = (stringOne) => {
-  return;
-};
+export const checkStringPalindrome = (stringOne) => stringOne.trim().split('').reverse().join('') === stringOne.trim().split('').join('')
 
 /**
  * A function that totals a nested array of scores arrays.
@@ -138,9 +131,10 @@ export const checkStringPalindrome = (stringOne) => {
  * @return {number[]} [20, 7, 3]
  */
 
-export const totalNestedScoresArr = (scoresArr) => {
-  return;
-};
+export const totalNestedScoresArr = (scoresArr) => scoresArr.reduce((result, arr) => {
+    result.push(arr.reduce((result, num) => result + num))
+    return result
+  }, [])
 
 /**
  * Expert Challenge
@@ -172,5 +166,17 @@ export const totalNestedScoresArr = (scoresArr) => {
  */
 
 export const encryptString = (toEncrypt) => {
-  return;
+  const arr1 = []
+  const arr2 = []
+  const arr3 = []
+  return toEncrypt.split('').reduce((result, letter, index) => {
+    if (index % 3 === 0 && index !== 0) {
+      arr3.push(letter)
+    } else if (index % 2 === 0) {
+      arr2.push(letter)
+    } else {
+      arr1.push(letter)
+    }
+    return arr1.join('') + arr2.join('') + arr3.join('')
+  }, []).toString()
 };
