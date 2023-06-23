@@ -104,7 +104,6 @@ const postsArray = [
 
 // @returns {{postId: number, creator: number, postComment: number}[]}
 const newPostArr = (arr) => {
-    const {id, createdBy, commentNo} = arr[0]
     return arr.reduce((result, obj) => {
         const {id, createdBy, commentNo} = obj
         const newObj = {

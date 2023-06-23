@@ -20,7 +20,7 @@
 // call this function three times with different numbers and values of dec and delay
 // console.log the value of rejected or resolved promise
 
-const delayedIncDec = (n, mode, delay) => {
+const delayedIncDec = (n, mode, delay = 2500) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (typeof n === 'number' && mode === 'inc') {
@@ -34,7 +34,7 @@ const delayedIncDec = (n, mode, delay) => {
       } else {
         reject(`Invalid Input`)
       }
-    }, delay ? delay : 2500)
+    }, delay)
   })
 }
 delayedIncDec(1 , 'inc', 1000)

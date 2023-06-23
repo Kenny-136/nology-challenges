@@ -180,3 +180,18 @@ export const encryptString = (toEncrypt) => {
     return arr1.join('') + arr2.join('') + arr3.join('')
   }, []).toString()
 };
+
+
+
+// return toEncrypt
+// .split("")
+// .reduce(
+//   (acc, curr, i) => {
+//     const index = i % 3;
+//     acc[index].push(curr);
+//     return acc;
+//   },
+//   [[], [], []]
+// )
+// .flat()
+// .join("");
